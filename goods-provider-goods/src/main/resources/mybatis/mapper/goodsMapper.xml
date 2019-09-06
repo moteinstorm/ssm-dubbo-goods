@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhuzhiguang.goods.dao.GoodsMapper">
+
+	<!-- //org.apache.ibatis.type.EnumTypeHandler -->
+	<resultMap type="goods" id="goodsMapper">
+		<id column="id" property="id" />
+		<result column="category" property="category"
+			javaType="com.zhuzhiguang.goods.entity.CategoryEnum"
+			jdbcType="VARCHAR"
+			typeHandler="org.apache.ibatis.type.EnumTypeHandler" />
+		<result column="address" property="address"
+			javaType="com.zhuzhiguang.goods.entity.AddressEnum" jdbcType="INTEGER"
+			typeHandler="org.apache.ibatis.type.EnumOrdinalTypeHandler" />
+	</resultMap>
+	
+	<insert id="createGoodsShop">
+		insert into tb_goods_shop(goodsId,shopId) values
+		<foreach collection="shopIds" item="shopId" open=" " close=" " separator="," >
+			(#{goodsId},#{shopId})
+		</foreach>
+	</insert>
+
+	<select id="list" resultMap="goodsMapper">
+		select g.* , GROUP_CONCAT(s.id) as
+		shopIds, GROUP_CONCAT(s.`name`) as shopNames from tb_goods as g LEFT
+		join tb_goods_shop as gs on gs.goodsId=g.id
+		LEFT join tb_shop s on s.id=gs.shopId
+		GROUP BY g.id
+	</select>
+	
+	<select id="findById" resultMap="goodsMapper">
+		select g.* , GROUP_CONCAT(s.id) as
+		shopIds, GROUP_CONCAT(s.`name`) as shopNames from tb_goods as g LEFT
+		join tb_goods_shop as gs on gs.goodsId=g.id
+		LEFT join tb_shop s on s.id=gs.shopId
+		WHERE g.id=#{value}
+		GROUP BY g.id 
+	</select>
+	
+	
+<!--   private String 	name;
+  private	CategoryEnum category; // varchar
+  private 	AddressEnum address;// int
+  
+  //
+  private Date	createDate; -->
+ <insert id="create" parameterType="goods" useGeneratedKeys="true" 
+	        keyColumn="id" keyProperty="id">
+		insert into tb_goods(name,category,address,createDate) 
+		 values(#{name},
+		 #{category,typeHandler=org.apache.ibatis.type.EnumTypeHandler,jdbcType=VARCHAR,javaType=com.zhuzhiguang.goods.entity.CategoryEnum},
+		 #{address,javaType=com.zhuzhiguang.goods.entity.AddressEnum,jdbcType=INTEGER,
+			typeHandler=org.apache.ibatis.type.EnumOrdinalTypeHandler },
+		 #{createDate} ) 
+	</insert>
+
+
+</mapper>
