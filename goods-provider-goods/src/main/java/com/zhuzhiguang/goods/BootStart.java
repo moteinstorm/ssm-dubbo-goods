@@ -17,6 +17,8 @@ import com.zhuzhiguang.goods.service.GoodsService;
  *
  */
 public class BootStart {
+	
+	
 	public static void main(String[] args) throws IOException {
 		System.out.println("kaishi");
 		//org.apache.ibatis.type.JdbcType.INTEGER
@@ -32,7 +34,7 @@ public class BootStart {
 		goods.setCreateDate(new Date(102,3,23));
 		gs.create(goods);
 		*/
-		
+		System.out.println("ok");
 		System.in.read();
 		
 		

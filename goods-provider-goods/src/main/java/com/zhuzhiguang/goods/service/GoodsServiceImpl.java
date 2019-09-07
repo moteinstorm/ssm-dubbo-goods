@@ -59,4 +59,10 @@ public class GoodsServiceImpl  implements GoodsService{
 		
 	}
 
+	@Override
+	public Goods getGoodsByName(String name) {
+		// TODO Auto-generated method stub
+		return goodsMapper.getByName(name);
+	}
+
 }

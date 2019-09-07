@@ -55,7 +55,31 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		 #{address,javaType=com.zhuzhiguang.goods.entity.AddressEnum,jdbcType=INTEGER,
 			typeHandler=org.apache.ibatis.type.EnumOrdinalTypeHandler },
 		 #{createDate} ) 
-	</insert>
+</insert>
+
+<update id="update">
+	update tb_goods set name=#{name},
+	   	category=#{category,typeHandler=org.apache.ibatis.type.EnumTypeHandler,jdbcType=VARCHAR,javaType=com.zhuzhiguang.goods.entity.CategoryEnum},
+	  	address=#{address,javaType=com.zhuzhiguang.goods.entity.AddressEnum,jdbcType=INTEGER,typeHandler=org.apache.ibatis.type.EnumOrdinalTypeHandler },
+	  	createDate=#{createDate}
+	 where id=#{id} 
+</update>
+
+
+<delete id="deleteBatch">
+	delete from tb_goods where id in
+	<foreach collection="array" item="id" open="(" close=")" separator=",">
+		#{id}
+	</foreach>
+</delete>
+
+<!-- 删除中间表 -->
+<delete id="deleteBatchGoodsShop">
+	delete from tb_goods_shop where goodId in
+	<foreach collection="array" item="id" open="(" close=")" separator=",">
+		#{id}
+	</foreach>
+</delete>
 
 
 </mapper>

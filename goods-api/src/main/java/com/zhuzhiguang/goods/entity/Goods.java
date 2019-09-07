@@ -4,20 +4,23 @@ import java.io.Serializable;
 import java.util.Arrays;
 import java.util.Date;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 public class Goods  implements Serializable{
 	
  /**
 	 * 
 	 */
-	private static final long serialVersionUID = 128153043776435952L;
+ private static final long serialVersionUID = 128153043776435952L;
 
-private Integer id	;
+ private Integer id	;
  
   private String 	name;
   private	CategoryEnum category; // varchar
   private 	AddressEnum address;// int
   
-  //
+  
+  @DateTimeFormat(pattern="yyyy-MM-dd")
   private Date	createDate;
   
   

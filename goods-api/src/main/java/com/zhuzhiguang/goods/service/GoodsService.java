@@ -21,5 +21,7 @@ public interface GoodsService {
 	
 	PageInfo<Goods> list(int pageNum,int pageSize);
 	
+	Goods getGoodsByName(String name);
+	
 	
 }
