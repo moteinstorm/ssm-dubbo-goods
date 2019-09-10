@@ -1,15 +1,8 @@
 package com.zhuzhiguang.goods;
 
 import java.io.IOException;
-import java.util.Date;
 
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-
-import com.github.pagehelper.PageInfo;
-import com.zhuzhiguang.goods.entity.AddressEnum;
-import com.zhuzhiguang.goods.entity.CategoryEnum;
-import com.zhuzhiguang.goods.entity.Goods;
-import com.zhuzhiguang.goods.service.GoodsService;
 
 /**
  * 
